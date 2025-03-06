@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <title>WhatsApp Number Checker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function checkWhatsApp() {
+            let phone = document.getElementById("phone").value.trim();
+            let resultDiv = document.getElementById("result");
+
+            if (!phone.startsWith("+") || phone.length < 10) {
+                resultDiv.innerHTML = "❌ Please enter a valid number with country code (e.g. +918765432100)";
+                resultDiv.className = "text-red-400 bg-gray-800 p-3 mt-4 rounded w-full text-center";
+                return;
+            }
+
+            let waLink = `https://wa.me/${phone}`;
+            window.open(waLink, "_blank");
+
+            resultDiv.innerHTML = "✅ Opening WhatsApp... Check if the number is valid.";
+            resultDiv.className = "text-green-400 bg-gray-800 p-3 mt-4 rounded w-full text-center";
+        }
+    </script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-black p-5">
+    <div class="w-full max-w-md bg-gray-900 p-6 rounded-lg shadow-lg flex flex-col items-center">
+        <i class="fab fa-whatsapp text-green-400 text-5xl mb-3"></i>
+        <h1 class="text-2xl font-bold text-white text-center mb-4">WhatsApp Number Checker</h1>
+        <p class="text-gray-300 text-center mb-6">Enter a phone number to check if it's registered on WhatsApp.</p>
+        
+        <input type="text" id="phone" class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500" placeholder="Enter phone number (e.g. +918765432100)">
+        <button onclick="checkWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg mt-3 transition">Check WhatsApp</button>
+
+        <div id="result" class="hidden"></div>
+    </div>
+</body>
+</html>
